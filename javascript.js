@@ -1,5 +1,5 @@
-function getComputerChoice(){
-    let com = ["rock", "paper", "scissors"];
+function com_Random(){
+    let com = ["batu", "kertas", "gunting"];
     let random = Math.floor(Math.random() * com.length);
     return com[random]
 
@@ -7,77 +7,64 @@ function getComputerChoice(){
 
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection){
-        console.log("You Draw")
-    }else if(playerSelection === "rock"){
-        if(computerSelection === "paper"){
-            console.log("You Lose");
-            com_score += 1;
-        }
-        else if(computerSelection === "scissors"){
-            console.log("You Win");
-            player_score += 1;
-            
-        }
-    }else if(playerSelection === "paper"){
-        if(computerSelection === "scissors"){
-            console.log("You Lose");
-            com_score += 1;
-        }
-        else if(computerSelection === "rock"){
-            console.log("You Win");
-            player_score += 1;
-        }
-    }else if(playerSelection === "scissors"){
-        if(computerSelection === "rock"){
-            console.log("You Lose");
-            com_score += 1;
-        }
-        else if(computerSelection === "paper"){
-            console.log("You Win");
-            player_score += 1;
-        }
-    }
 
-}
-
-function game(){
-    let playerSelection = prompt("");
-    let computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-    
-    playerSelection = prompt("");
-    computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-
-    playerSelection = prompt("");
-    computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-
-    playerSelection = prompt("");
-    computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-
-
-    playerSelection = prompt("");
-    computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-
-
-    if(player_score > com_score){
-        console.log("You Win The Game");
-    }else if(player_score < com_score){
-        console.log("You Lose The Game");
-    }else if(player_score === com_score){
-        console.log("The game is Draw");
+    if(playerSelection === computerSelection){
+        return "draw";
+    }else if(playerSelection === "batu" && computerSelection === "kertas"){
+        return "lose";
+    }else if(playerSelection === "batu" && computerSelection === "gunting"){
+        return "win";
+    }else if(playerSelection === "kertas" && computerSelection === "gunting"){
+        return "lose";
+    }else if(playerSelection === "kertas" && computerSelection === "batu"){
+        return "win";
+    }else if(playerSelection === "gunting" && computerSelection === "batu"){
+        return "lose";
+    }else if(playerSelection === "gunting" && computerSelection === "kertas"){
+        return "win";
     }
 }
 
-let player_score = 0;
-let com_score = 0;
-  
+function game(playerChoice){
+    let comChoice = com_Random();
 
-game();
+    condition = playRound(playerChoice, comChoice);
+    let count = 0;
+    count += 1;
+    console.log(condition);
+    console.log(count);
+}
 
-console.log(player_score)
-console.log(com_score)
+const batuImg = document.getElementById("batu");
+const kertasImg = document.getElementById("kertas");
+const guntingImg = document.getElementById("gunting");
+
+function clickBatu(){
+    playerSelect = "batu";
+    game(playerSelect);
+    batuImg.removeEventListener("click", clickBatu);
+    kertasImg.removeEventListener("click", clickKertas);
+    guntingImg.removeEventListener("click", clickGunting);
+}
+
+function clickKertas(){
+    playerSelect = "kertas";
+    game(playerSelect);
+    batuImg.removeEventListener("click", clickBatu);
+    kertasImg.removeEventListener("click", clickKertas);
+    guntingImg.removeEventListener("click", clickGunting);
+}
+
+function clickGunting(){
+    playerSelect = "gunting";
+    game(playerSelect);
+    batuImg.removeEventListener("click", clickBatu);
+    kertasImg.removeEventListener("click", clickKertas);
+    guntingImg.removeEventListener("click", clickGunting);
+}
+
+
+batuImg.addEventListener("click", clickBatu);
+kertasImg.addEventListener("click", clickKertas);
+guntingImg.addEventListener("click", clickGunting);
+
