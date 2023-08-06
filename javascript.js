@@ -5,6 +5,11 @@ function com_Random(){
 
 }
 
+function updateScore(user, com){
+    document.querySelector("#playerScoreText").textContent =user;
+    document.querySelector("#comScoreText").textContent =com;
+}
+
 
 function playRound(playerSelection, computerSelection) {
 
@@ -36,10 +41,11 @@ function game(playerChoice){
     condition = playRound(playerChoice, comChoice);
     console.log(condition);
     games_play ++;
-    if(games_play < 5){
+    if(games_play <= 5){
         game_start();
         console.log(com_score);
         console.log(player_score);
+        updateScore(player_score, com_score);
 
     }else{
         batuImg.removeEventListener("click", clickBatu);
